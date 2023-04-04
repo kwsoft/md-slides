@@ -34,10 +34,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     function createSlides(parsedHTML) {
-        // Implement your slide creation logic here
-        // 1. Extract headings and content
-        // 2. Create slide elements
-        // 3. Set slide background images
-        // 4. Append slides to the presentation element
+        const slides = [];
+        const headings = parsedHTML.querySelectorAll("h1, h2, h3");
+    
+        headings.forEach((heading) => {
+            const slide = document.createElement("div");
+            slide.classList.add("slide");
+    
+            if (heading.tagName === "H1") {
+                slide.classList.add("presentation-title");
+                slide.innerHTML = `<h1>${heading.textContent}</h1>`;
+            } else if (heading.tagName === "H2") {
+                slide.classList.add("section-title");
+                slide.innerHTML = `<h2>${heading.textContent}</h2>`;
+                // Set a random urban architecture image as the background
+                slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture)`;
+            } else if (heading.tagName === "H3") {
+                slide.classList.add("page");
+                slide.innerHTML = `<h3>${heading.textContent}</h3>`;
+                let sibling = heading.nextElementSibling;
+                while (sibling && !sibling.matches("h1, h2, h3")) {
+                    slide.appendChild(sibling.cloneNode(true));
+                    sibling = sibling.nextElementSibling;
+                }
+            }
+    
+            slides.push(slide);
+            presentation.appendChild(slide);
+        });
+    
+        return slides;
     }
 });

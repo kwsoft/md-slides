@@ -153,3 +153,19 @@ With this script tag that specifies the version and loads the non-minified versi
 ```
 
 Now, refresh your browser at http://localhost:8080. The application should load without any errors related to the marked function. If you still encounter issues, please let me know, and we can investigate further.
+
+## Prompt 4
+
+### Prompt
+
+that worked, now slides is undefined, since the createSlides method is not implemented, can you suggest an implementation?
+
+### Answer
+
+Of course! Here's a possible implementation of the createSlides function. This implementation should work with the provided code snippets and the sample content.md content shared earlier. You may need to modify the function to adapt it to your specific needs.
+
+(see in [slides.js])
+
+This implementation creates a slide for each heading in the parsed HTML content. It sets the appropriate background images for section title slides and includes the content within heading 3 slides.
+
+Once you've added the createSlides function to your slides.js file, refresh your browser at http://localhost:8080. The application should now load and display the interactive slides based on the content.md file. Note that this is a basic implementation, and you may want to further customize the function to better suit your needs.
