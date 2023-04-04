@@ -264,3 +264,56 @@ Then, add the display: flex property to the .slide.active class in the styles.cs
 ```
 
 Now, refresh your browser at http://localhost:8080. The slides should be displayed one at a time, and you should be able to navigate through them as intended.
+
+## Prompt 6
+
+### Prompt
+
+That worked, thanks. Can you now add a creative commons background image about ChatGPT for the presentation title, and add a transluscent white rectangle beneath titles on pages with a background image so that humans can read the titles?
+
+### Answer
+
+To add a Creative Commons background image about ChatGPT for the presentation title slide, you can use an image from a source like Unsplash or any other preferred source of Creative Commons images.
+
+Add the following CSS rule to your styles.css file to set the background image for the presentation title slide:
+
+```
+.presentation-title {
+    background-image: url('https://source.unsplash.com/random/featured/?ai,chatbot');
+    background-size: cover;
+    background-position: center;
+}
+```
+
+To add a translucent white rectangle beneath titles on pages with a background image, update the .section-title and .presentation-title classes in your styles.css file as follows:
+
+```
+.presentation-title,
+.section-title {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.presentation-title:before,
+.section-title:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 1;
+}
+
+.presentation-title > *,
+.section-title > * {
+    position: relative;
+    z-index: 2;
+}
+```
+
+This will create a translucent white rectangle beneath the titles by adding a :before pseudo-element with a white background color and 60% opacity. The z-index properties ensure that the titles are displayed on top of the translucent rectangle.
+
+Now, refresh your browser at http://localhost:8080. The presentation title slide should have a ChatGPT-related background image, and translucent white rectangles should be displayed beneath the titles on slides with background images, making them easier to read.
