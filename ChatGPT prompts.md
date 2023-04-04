@@ -123,3 +123,33 @@ For example, you could use the following sample content: see [content.md]
 Once you've created the content.md file and added some content, refresh your browser at http://localhost:8080. The application should now load the Markdown content and display it as interactive slides.
 
 Remember that the provided code snippets in the previous answers are just a starting point, and you may need to modify and add more code to achieve the desired functionality fully. Make sure to implement the createSlides function and any other necessary logic for parsing and rendering the Markdown content as interactive slides.
+
+## Prompt 3
+
+### Prompt
+
+ok, content.md added and now found, but getting this error now: 
+
+ Uncaught (in promise) TypeError: marked is not a function
+    <anonymous> http://localhost:8080/slides.js:4
+    async* http://localhost:8080/slides.js:1
+
+what's missing?
+
+### Answer
+
+It looks like the issue is related to the marked library not being recognized as a function. The problem could be due to the library not being loaded properly or a change in the library's export method.
+
+To resolve this issue, replace the following script tag in your HTML file:
+
+```
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+```
+
+With this script tag that specifies the version and loads the non-minified version:
+
+```
+<script src="https://cdn.jsdelivr.net/npm/marked@2.1.3/lib/marked.js"></script>
+```
+
+Now, refresh your browser at http://localhost:8080. The application should load without any errors related to the marked function. If you still encounter issues, please let me know, and we can investigate further.
