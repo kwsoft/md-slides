@@ -53,11 +53,17 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .slide.active {
     display: flex;
 }
+
+.slide-content {
+    max-width: 80%;
+}
+
 
 .page > * {
     text-align: left;

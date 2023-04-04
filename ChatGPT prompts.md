@@ -317,3 +317,95 @@ To add a translucent white rectangle beneath titles on pages with a background i
 This will create a translucent white rectangle beneath the titles by adding a :before pseudo-element with a white background color and 60% opacity. The z-index properties ensure that the titles are displayed on top of the translucent rectangle.
 
 Now, refresh your browser at http://localhost:8080. The presentation title slide should have a ChatGPT-related background image, and translucent white rectangles should be displayed beneath the titles on slides with background images, making them easier to read.
+
+## Prompt 7
+
+### Prompt
+
+Thanks, that helped. Can you now center all text in the middle of each page? It's currently horizontally centered, but at the bottom of each page.
+
+### Answer
+
+My apologies for the confusion. To center the text both horizontally and vertically in each slide, you can update the .slide class in your styles.css file as follows:
+
+```
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+```
+
+The justify-content: center; and align-items: center; properties in the .slide class ensure that the content is centered both vertically and horizontally within each slide. Additionally, the text-align: center; property will center-align the text within the slide.
+
+Now, refresh your browser at http://localhost:8080. The text should be centered both horizontally and vertically in the middle of each slide.
+
+### Prompt
+
+That does not work, text is still at the bottom of the page.
+
+### Answer
+
+I apologize for the confusion. It appears the issue might be caused by the previous implementation of the createSlides function, which clones the sibling elements of the heading elements and appends them to the slide. This method might be causing the layout issues with the centered content.
+
+Let's modify the createSlides function to wrap the content in a <div> element with a class of slide-content. This will help us properly center the content within each slide.
+
+Update the createSlides function in your slides.js file as follows:
+
+```
+function createSlides(parsedHTML) {
+    const slides = [];
+    const headings = parsedHTML.querySelectorAll("h1, h2, h3");
+
+    headings.forEach((heading) => {
+        const slide = document.createElement("div");
+        slide.classList.add("slide");
+
+        const slideContent = document.createElement("div");
+        slideContent.classList.add("slide-content");
+
+        if (heading.tagName === "H1") {
+            slide.classList.add("presentation-title");
+            slideContent.innerHTML = `<h1>${heading.textContent}</h1>`;
+        } else if (heading.tagName === "H2") {
+            slide.classList.add("section-title");
+            slideContent.innerHTML = `<h2>${heading.textContent}</h2>`;
+            // Set a random urban architecture image as the background
+            slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture)`;
+        } else if (heading.tagName === "H3") {
+            slide.classList.add("page");
+            slideContent.innerHTML = `<h3>${heading.textContent}</h3>`;
+            let sibling = heading.nextElementSibling;
+            while (sibling && !sibling.matches("h1, h2, h3")) {
+                slideContent.appendChild(sibling.cloneNode(true));
+                sibling = sibling.nextElementSibling;
+            }
+        }
+
+        slide.appendChild(slideContent);
+        slides.push(slide);
+        presentation.appendChild(slide);
+    });
+
+    return slides;
+}
+```
+
+Now, update your styles.css file by adding the following rule to style the .slide-content class:
+
+```
+.slide-content {
+    max-width: 80%;
+}
+```
+
+This will limit the content width to 80% of the slide's width.
+
+Now, refresh your browser at http://localhost:8080. The text should be centered both horizontally and vertically in the middle of each slide.
