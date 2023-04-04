@@ -169,3 +169,98 @@ Of course! Here's a possible implementation of the createSlides function. This i
 This implementation creates a slide for each heading in the parsed HTML content. It sets the appropriate background images for section title slides and includes the content within heading 3 slides.
 
 Once you've added the createSlides function to your slides.js file, refresh your browser at http://localhost:8080. The application should now load and display the interactive slides based on the content.md file. Note that this is a basic implementation, and you may want to further customize the function to better suit your needs.
+
+## Prompt 5
+
+### Prompt
+
+Great, that went well, I can now see the content of my presentation and navigate through the slides! I'm impressed! Can you now please improve a bit by centering the content of the content pages?
+
+### Answer
+
+I'm glad the provided solution is working for you! To center the content of the content pages, you can make a few adjustments to the styles.css file.
+
+First, update the .slide class style to include flexbox properties:
+
+```
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+```
+
+This will make sure all elements inside a slide are centered horizontally and vertically.
+
+Next, add the following CSS rule to preserve the left alignment of the content within each content page: 
+
+```
+.page > * {
+    text-align: left;
+}
+```
+
+This will make sure the content of the content pages remains left-aligned while being centered within the slide. If you'd like to adjust the content's vertical positioning or add some padding, feel free to modify the CSS rules accordingly.
+
+Now, refresh your browser at http://localhost:8080. The content of the content pages should be centered within their respective slides.
+
+### Prompt
+
+in your suggestion, you define display twice, once with non, once, with flex. which is it?
+
+### Answer
+
+Apologies for the oversight. You should use display: flex; to center the content of the content pages. The display: none; property should be removed. Here's the corrected CSS rule for the .slide class:
+
+```
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+```
+
+### Prompt
+
+it seems all pages are displayed at the same time, can you help?
+
+### Answer
+
+Apologies for the confusion. It appears that the display: none property was removed in the previous response. This property is used to hide all slides by default. You can add it back to the .slide class in the styles.css file to fix the issue:
+
+```
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+```
+
+Then, add the display: flex property to the .slide.active class in the styles.css file to ensure that the active slide is displayed:
+
+```
+.slide.active {
+    display: flex;
+}
+```
+
+Now, refresh your browser at http://localhost:8080. The slides should be displayed one at a time, and you should be able to navigate through them as intended.
