@@ -46,10 +46,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     
             if (heading.tagName === "H1") {
                 slide.classList.add("presentation-title");
-                slideContent.innerHTML = `<h1>${heading.textContent}</h1>`;
+                slideContent.innerHTML = `<h1><span>${heading.textContent}</span></h1>`;
             } else if (heading.tagName === "H2") {
                 slide.classList.add("section-title");
-                slideContent.innerHTML = `<h2>${heading.textContent}</h2>`;
+                slideContent.innerHTML = `<h2><span>${heading.textContent}</span></h2>`;
                 // Set a random urban architecture image as the background
                 slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture)`;
             } else if (heading.tagName === "H3") {

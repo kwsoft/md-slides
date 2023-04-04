@@ -409,3 +409,73 @@ Now, update your styles.css file by adding the following rule to style the .slid
 This will limit the content width to 80% of the slide's width.
 
 Now, refresh your browser at http://localhost:8080. The text should be centered both horizontally and vertically in the middle of each slide.
+
+## Prompt 8
+
+### Prompt
+
+Thanks, that worked. Can we now make the white translucent box beneath titles to be a rectangle matching the title's size, add a bit of padding, and use rounded corners for the rectangles? It should not use the whole page size.
+
+### Answer
+
+To make the white translucent box beneath titles match the title's size with a bit of padding and rounded corners, you can modify the .presentation-title:before and .section-title:before CSS rules in your styles.css file.
+
+Update the CSS rules as follows:
+
+```
+.presentation-title:before,
+.section-title:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+    z-index: 1;
+}
+```
+
+The top: 50%;, left: 50%;, and transform: translate(-50%, -50%); properties will ensure that the translucent rectangle is positioned exactly beneath the title. The padding: 10px 20px; property will add some padding around the title, and the border-radius: 5px; property will create rounded corners.
+
+Now, refresh your browser at http://localhost:8080. The white translucent box beneath the titles should now match the title's size, have some padding, and display rounded corners.
+
+
+### Prompt
+
+Sorry I meant for the box to match the dimensions of the title text, currently it's a fixed size rectangle not matching the text dimensions.
+
+### Answer
+
+Apologies for the misunderstanding. To create a translucent white rectangle that matches the dimensions of the title text, you can create a <span> element inside the <h1> or <h2> tags and apply a background color with padding and rounded corners.
+
+First, update the createSlides function in your slides.js file to wrap the title text with a <span> element:
+
+```
+// ...
+if (heading.tagName === "H1") {
+    slide.classList.add("presentation-title");
+    slideContent.innerHTML = `<h1><span>${heading.textContent}</span></h1>`;
+} else if (heading.tagName === "H2") {
+    slide.classList.add("section-title");
+    slideContent.innerHTML = `<h2><span>${heading.textContent}</span></h2>`;
+    // Set a random urban architecture image as the background
+    slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture)`;
+}
+// ...
+```
+
+Next, update your styles.css file to remove the .presentation-title:before and .section-title:before rules and replace them with the following rules to style the <span> element inside the <h1> and <h2> tags:
+
+```
+.presentation-title h1 > span,
+.section-title h2 > span {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+```
+
+Now, refresh your browser at http://localhost:8080. The white translucent box should now match the dimensions of the title text, have some padding, and display rounded corners.
+
