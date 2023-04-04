@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentSlide = 0;
     slides[currentSlide].classList.add("active");
 
+    presentation.focus()
+
     presentation.addEventListener("keydown", (event) => {
         switch (event.key) {
             case "ArrowLeft":

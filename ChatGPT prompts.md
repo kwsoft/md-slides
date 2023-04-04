@@ -479,3 +479,67 @@ Next, update your styles.css file to remove the .presentation-title:before and .
 
 Now, refresh your browser at http://localhost:8080. The white translucent box should now match the dimensions of the title text, have some padding, and display rounded corners.
 
+## Prompt 9
+
+### Prompt
+
+When I refresh the browser or simply navigate to `http://localhost:8008`, the arrow keys don't work as expected, until I click on the presentation content in the browser. What could be the problem?
+
+### Answer
+
+The issue you're experiencing is due to the browser not focusing on the presentation content when the page is loaded. When you click on the presentation content, the browser focuses on it, allowing the arrow keys to function as expected.
+
+To resolve this issue, you can use JavaScript to set the focus on the presentation element when the page loads. Update your slides.js file by adding the following line at the end of the init function:
+
+```
+function init() {
+    // ...
+    presentation.focus();
+}
+```
+
+Now, when you refresh your browser or navigate to http://localhost:8080, the arrow keys should work as expected without requiring you to click on the presentation content first.
+
+### Prompt
+
+I see no `init` function
+
+### Answer
+
+Apologies for the confusion. You're right; there's no init function in the previous code. Instead, add the presentation.focus(); line at the end of the fetchMarkdown function in your slides.js file:
+
+```
+async function fetchMarkdown() {
+    const response = await fetch("content.md");
+    const md = await response.text();
+    const html = marked(md);
+    const parsedHTML = new DOMParser().parseFromString(html, "text/html");
+    slides = createSlides(parsedHTML);
+    presentation.focus();
+}
+```
+
+Now, when you refresh your browser or navigate to http://localhost:8080, the arrow keys should work as expected without requiring you to click on the presentation content first.
+
+### Prompt
+
+There isn't a `fetchMarkdown` function either, but I've added `presentation.focus` to the anomymous callback function of `document.addEventListener`
+
+### Answer
+
+I apologize for the confusion in my previous responses. I appreciate your patience. Yes, you can add presentation.focus(); to the anonymous callback function of document.addEventListener as you mentioned. Here's the updated code block in slides.js:
+
+```
+document.addEventListener("DOMContentLoaded", async () => {
+    const response = await fetch("content.md");
+    const md = await response.text();
+    const html = marked(md);
+    const parsedHTML = new DOMParser().parseFromString(html, "text/html");
+    slides = createSlides(parsedHTML);
+    currentSlideIndex = 0;
+    updateSlides();
+    presentation.focus();
+});
+```
+
+With this change, when you refresh your browser or navigate to http://localhost:8080, the arrow keys should work as expected without requiring you to click on the presentation content first.
