@@ -50,12 +50,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 slide.classList.add("presentation-title");
                 slideContent.innerHTML = `<h1><span>${heading.textContent}</span></h1>`;
                 // Set a random urban architecture image as the background
-                slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture&_=${uuidv4()})`;
+                slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?abstract,colorful,pattern&_=${uuidv4()})`;
             } else if (heading.tagName === "H2") {
                 slide.classList.add("section-title");
                 slideContent.innerHTML = `<h2><span>${heading.textContent}</span></h2>`;
                 // Set a random urban architecture image as the background
-                slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture&_=${uuidv4()})`;
+                slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?art&_=${uuidv4()})`;
             } else if (heading.tagName === "H3") {
                 slide.classList.add("page");
                 slideContent.innerHTML = `<h3>${heading.textContent}</h3>`;
