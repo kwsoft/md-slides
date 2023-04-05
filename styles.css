@@ -12,12 +12,6 @@ body, html {
     background-size: cover;
 }
 
-.presentation-title {
-    background-image: url('https://source.unsplash.com/random/featured/?ai,chatbot');
-    background-size: cover;
-    background-position: center;
-}
-
 .presentation-title,
 .section-title {
     position: relative;
