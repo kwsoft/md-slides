@@ -543,3 +543,83 @@ document.addEventListener("DOMContentLoaded", async () => {
 ```
 
 With this change, when you refresh your browser or navigate to http://localhost:8080, the arrow keys should work as expected without requiring you to click on the presentation content first.
+
+## Prompt 10
+
+### Prompt
+
+how can I ensure I do not get cached images from unsplash.com? currently all H2 slides use the same image
+
+### Answer
+
+To avoid getting cached images from Unsplash.com and ensure that each H2 slide has a unique background image, you can append a unique parameter to the image URL. One way to do this is to use the current iteration index in the headings.forEach loop.
+
+Update the createSlides function in your slides.js file as follows:
+
+```
+function createSlides(parsedHTML) {
+    const slides = [];
+    const headings = parsedHTML.querySelectorAll("h1, h2, h3");
+    let sectionCount = 0;
+
+    headings.forEach((heading) => {
+        // ...
+        if (heading.tagName === "H2") {
+            slide.classList.add("section-title");
+            slideContent.innerHTML = `<h2>${heading.textContent}</h2>`;
+            // Set a random urban architecture image as the background
+            slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture&_=${sectionCount})`;
+            sectionCount++;
+        }
+        // ...
+    });
+
+    return slides;
+}
+```
+
+### Prompt
+
+can we use UUIDs instead?
+
+### Answer
+
+Certainly! To use UUIDs to ensure each H2 slide gets a unique background image, you can use a simple UUID generator function.
+
+First, add the following uuidv4 function to your slides.js file:
+
+```
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0,
+            v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+```
+
+Then, update the createSlides function in your slides.js file to use the uuidv4 function when setting the background image for H2 slides:
+
+```
+function createSlides(parsedHTML) {
+    const slides = [];
+    const headings = parsedHTML.querySelectorAll("h1, h2, h3");
+
+    headings.forEach((heading) => {
+        // ...
+        if (heading.tagName === "H2") {
+            slide.classList.add("section-title");
+            slideContent.innerHTML = `<h2>${heading.textContent}</h2>`;
+            // Set a random urban architecture image as the background
+            slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture&_=${uuidv4()})`;
+        }
+        // ...
+    });
+
+    return slides;
+}
+```
+
+With this change, each H2 slide will have a unique UUID parameter appended to the Unsplash image URL, ensuring that a new image is fetched for each slide.
+
+Now, when you refresh your browser at http://localhost:8080, each H2 slide should have a unique background image.

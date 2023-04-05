@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 slide.classList.add("section-title");
                 slideContent.innerHTML = `<h2><span>${heading.textContent}</span></h2>`;
                 // Set a random urban architecture image as the background
-                slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture)`;
+                slide.style.backgroundImage = `url(https://source.unsplash.com/random/featured/?urban,architecture&_=${uuidv4()})`;
             } else if (heading.tagName === "H3") {
                 slide.classList.add("page");
                 slideContent.innerHTML = `<h3>${heading.textContent}</h3>`;
@@ -71,4 +71,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     
         return slides;
     }
+
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0,
+                v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+    
 });
